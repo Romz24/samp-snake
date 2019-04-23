@@ -1,8 +1,8 @@
 #include <a_samp>
-#include <streamer>
+#include <streamer> // https://github.com/samp-incognito/samp-streamer-plugin
 
 #undef MAX_PLAYERS
-#define MAX_PLAYERS			5
+#define MAX_PLAYERS			5 // чем меньше тем лучше
 
 #define DEFAULT_X			1328.4181 // x
 #define DEFAULT_Y			2132.8904 // y
@@ -67,14 +67,6 @@ enum barrier_info {
 			barrier_object
 }
 new BarrierInfo[MAX_PLAYERS][MAX_BARRIER_SIZE][barrier_info];
-
-public OnFilterScriptInit() {
-	return 1;
-}
-
-public OnFilterScriptExit() {
-	return 1;
-}
 
 public OnPlayerUpdate(playerid) {
 	if(PlayerInfo[playerid][player_start] && PlayerInfo[playerid][player_timer]) {
