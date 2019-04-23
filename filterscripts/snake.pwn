@@ -15,7 +15,7 @@
 #define CAMERA_HEIGHT		25.0 // высота камеры
 #define CAMERA_INCLINE		0.001 // наклон камеры (обязательно больше 0)
 
-#define MAX_ZONE_WIDTH		22 // шырина
+#define MAX_ZONE_WIDTH		22 // ширина
 #define MAX_ZONE_HEIGHT		18 // высота
 
 #define MAX_BARRIER_SIZE	(MAX_ZONE_WIDTH * MAX_ZONE_HEIGHT) * 5 / 100 // количество барьеров (не трогать)
@@ -389,7 +389,7 @@ stock CreateSnake(playerid) {
 
 			// Объект
 			SnakeInfo[playerid][i][snake_object] = CreateDynamicObject(19789, SnakeInfo[playerid][i][snake_x], SnakeInfo[playerid][i][snake_y], DEFAULT_Z, 0.0, 0.0, 90.0, DEFAULT_VWORLD, 0, playerid);
-			if(i == 0) { // Голова
+			if(i == 0) { // Голова змейки
 				SetDynamicObjectMaterial(SnakeInfo[playerid][i][snake_object], 0, 17079, "cuntwland", "ws_freeway4", 0xFFFFFFFF);
 			} else {
 				SetDynamicObjectMaterial(SnakeInfo[playerid][i][snake_object], 0, 8538, "vgsrailroad", "concreteyellow256 copy", 0xFFFFFFFF);
@@ -429,7 +429,7 @@ stock CreateItem(playerid) {
 		}
 	}
 
-	// Пересоздаем
+	// Пересоздаем объекты
 	if(IsValidDynamicObject(ItemInfo[playerid][item_object])) {
 		DestroyDynamicObject(ItemInfo[playerid][item_object]);
 	}
