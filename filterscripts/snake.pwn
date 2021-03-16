@@ -1,5 +1,5 @@
 #include <a_samp>
-#include <streamer> // https://github.com/samp-incognito/samp-streamer-plugin
+#include ..\plugins\streamer.inc
 
 #undef MAX_PLAYERS
 #define MAX_PLAYERS			5 // чем меньше тем лучше
@@ -12,11 +12,11 @@
 #define DEFAULT_DIALOGID	1000 // ид диалога
 #define DEFAULT_TIME		300 // стандартное время таймера
 
-#define CAMERA_HEIGHT		25.0 // высота камеры
+#define CAMERA_HEIGHT		28.0 // высота камеры
 #define CAMERA_INCLINE		0.001 // наклон камеры (обязательно больше 0)
 
-#define MAX_ZONE_WIDTH		22 // ширина
-#define MAX_ZONE_HEIGHT		18 // высота
+#define MAX_ZONE_WIDTH		35 // ширина
+#define MAX_ZONE_HEIGHT		20 // высота
 
 #define MAX_BARRIER_SIZE	(MAX_ZONE_WIDTH * MAX_ZONE_HEIGHT) * 5 / 100 // количество барьеров (не трогать)
 #define MAX_ZONE_SIZE		(MAX_ZONE_WIDTH * 2) + (MAX_ZONE_HEIGHT * 2) - 4 // количество объектов игровой зоны (не трогать)
@@ -513,7 +513,7 @@ stock UpdatePlayerCamera(playerid) {
 	Streamer_GetFloatData(STREAMER_TYPE_OBJECT, SnakeInfo[playerid][0][snake_object], E_STREAMER_R_Z, angle);
 
 	// Камера
-	SetPlayerCameraPos(playerid, SnakeInfo[playerid][0][snake_x] + (2.5 * floatsin(-angle, degrees)), SnakeInfo[playerid][0][snake_y] + (2.5 * floatcos(-angle, degrees)), (DEFAULT_Z + 2.0));
+	SetPlayerCameraPos(playerid, SnakeInfo[playerid][0][snake_x] + (2.7 * floatsin(-angle, degrees)), SnakeInfo[playerid][0][snake_y] + (2.7 * floatcos(-angle, degrees)), (DEFAULT_Z + 2.0));
 	SetPlayerCameraLookAt(playerid, SnakeInfo[playerid][0][snake_x] + (-5.0 * floatsin(-angle, degrees)), SnakeInfo[playerid][0][snake_y] + (-5.0 * floatcos(-angle, degrees)), (DEFAULT_Z + 0.5), 2);
 
 	// Счет
@@ -571,8 +571,8 @@ public OnPlayerSnakeUpdate(playerid) {
 						KillTimer(PlayerInfo[playerid][player_timer]);
 						PlayerInfo[playerid][player_timer] = 0;
 						PlayerPlaySound(playerid, 14408, 0.0, 0.0, 0.0);
-						new string[36];
-						format(string, sizeof(string), "Вы проиграли, ваш счет: %d", GetSnakeScore(playerid));
+						new string[64 + 1];
+						format(string, sizeof string, "Вы проиграли, ваш счет: %d", GetSnakeScore(playerid));
 						ShowPlayerDialog(playerid, DEFAULT_DIALOGID + 2, DIALOG_STYLE_MSGBOX, "Поражение", string, "Рестарт", "Выход");
 					}
 				}
@@ -586,8 +586,8 @@ public OnPlayerSnakeUpdate(playerid) {
 							KillTimer(PlayerInfo[playerid][player_timer]);
 							PlayerInfo[playerid][player_timer] = 0;
 							PlayerPlaySound(playerid, 14408, 0.0, 0.0, 0.0);
-							new string[36];
-							format(string, sizeof(string), "Вы проиграли, ваш счет: %d", GetSnakeScore(playerid));
+							new string[64 + 1];
+							format(string, sizeof string, "Вы проиграли, ваш счет: %d", GetSnakeScore(playerid));
 							ShowPlayerDialog(playerid, DEFAULT_DIALOGID + 2, DIALOG_STYLE_MSGBOX, "Поражение", string, "Рестарт", "Выход");
 						}
 					}
@@ -602,8 +602,8 @@ public OnPlayerSnakeUpdate(playerid) {
 							KillTimer(PlayerInfo[playerid][player_timer]);
 							PlayerInfo[playerid][player_timer] = 0;
 							PlayerPlaySound(playerid, 14408, 0.0, 0.0, 0.0);
-							new string[36];
-							format(string, sizeof(string), "Вы проиграли, ваш счет: %d", GetSnakeScore(playerid));
+							new string[64 + 1];
+							format(string, sizeof string, "Вы проиграли, ваш счет: %d", GetSnakeScore(playerid));
 							ShowPlayerDialog(playerid, DEFAULT_DIALOGID + 2, DIALOG_STYLE_MSGBOX, "Поражение", string, "Рестарт", "Выход");
 						}
 					}
@@ -620,8 +620,8 @@ public OnPlayerSnakeUpdate(playerid) {
 						KillTimer(PlayerInfo[playerid][player_timer]);
 						PlayerInfo[playerid][player_timer] = 0;
 						PlayerPlaySound(playerid, 31205, 0.0, 0.0, 0.0);
-						new string[35];
-						format(string, sizeof(string), "Вы победили, ваш счет: %d", GetSnakeScore(playerid));
+						new string[64 + 1];
+						format(string, sizeof string, "Вы победили, ваш счет: %d", GetSnakeScore(playerid));
 						ShowPlayerDialog(playerid, DEFAULT_DIALOGID + 2, DIALOG_STYLE_MSGBOX, "Победа", string, "Рестарт", "Выход");
 					} else {
 						CreateItem(playerid);
@@ -660,8 +660,8 @@ public OnPlayerSnakeUpdate(playerid) {
 					}
 
 					// Обновление счета
-					new string[18];
-					format(string, sizeof(string), "Счет: %d", GetSnakeScore(playerid));
+					new string[32 + 1];
+					format(string, sizeof string, "Счет: %d", GetSnakeScore(playerid));
 					SetDynamicObjectMaterialText(ZoneText[playerid], 0, string, 40, "Ariel", 25, 1, 0xFFFFFFFF, 0, 1);
 
 					// Обновление камеры & позиции счета
