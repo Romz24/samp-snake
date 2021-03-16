@@ -1,1 +1,2 @@
-*.pwn linguist-language=Pawn
+*.pwn linguist-language=Pawn working-tree-encoding=CP1251 eol=CRLF
+*.inc linguist-language=Pawn working-tree-encoding=CP1251 eol=CRLF
